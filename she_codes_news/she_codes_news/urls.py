@@ -15,9 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from users import url as userUrl
 
 urlpatterns = [
     # path('', include('news.urls')),
     path('news/', include('news.urls')),
     path('admin/', admin.site.urls),
+    path('users/', include(userUrl)),
+    path('users/', include('django.contrib.auth.urls')),
 ]
