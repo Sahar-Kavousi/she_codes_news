@@ -2,29 +2,28 @@
 <!doctype html>
 
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <title>She Codes News</title>
-        <meta name="description" content="">
-        <meta name="author" content="Hayley van Waas">
-        <meta name="author" content="Sahar">
-        <link href="https://fonts.googleapis.com/css?family=Manjari&display=swap" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
-        {% block stylesheets %}{% endblock %}
+<head>
+    <meta charset="utf-8">
+    <title>She Codes News</title>
+    <meta name="description" content="">
+    <meta name="author" content="Hayley van Waas">
+    <meta name="author" content="Sahar">
 
-    </head>
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    {% block stylesheets %}{% endblock %}
+    <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
 
-    <body>
-        <header>
-            <div id="header-text">
-                <a id="header-link" href="{% url 'news:index' %}">
-                    <h1>She {Codes} News</h1>
-                </a>
-            </div>
-            {% include './nav.html' %}
-        </header>
+</head>
 
-        <!-- content blocks here -->
-        {% block content %}{% endblock %}
-    </body>
+<body>
+
+{% include './nav.html' %}
+
+
+<div class="container">
+    <!-- content blocks here -->
+    {% block content %}{% endblock %} </div>
+</body>
 </html>

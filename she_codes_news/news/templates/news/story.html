@@ -2,15 +2,26 @@
 {% extends "base.html" %}
 {% load static %}
 {% block stylesheets %}
-<link rel="stylesheet" type="text/css" href="{% static 'news/styles.css'%}">
+    <link rel="stylesheet" type="text/css" href="{% static 'news/styles.css' %}">
 {% endblock %}
 {% block content %}
-<div id="story-wrapper">
-    <h2>{{ story.title }}</h2>
-    <h4>{{ story.author }}</h4>
-    <div id="story-content">
-        <img src="{% static '/news/images/placeholder-5.jpg' %}">
-        {{ story.content|linebreaks }}
+
+
+    <div class="d-flex flex-column">
+        <div class="d-flex flex-column align-items-center my-4">
+            <h4>{{ story.title }}</h4>
+        </div>
+        <div class="d-flex my-4 p-4">
+            <div class="shadow-sm p-3 mb-5 bg-body rounded">
+                <img src="{% static '/news/images/placeholder-5.jpg' %}">
+            </div>
+            <div class="p-4">
+
+                <h5>Author: {{ story.author }}</h5>
+                <h6 class="my-3">Publication date: {{ story.pub_date|date:"d-M-Y"}}</h6>
+                {{ story.content|linebreaks }}
+            </div>
+        </div>
+
     </div>
-</div>
 {% endblock %}

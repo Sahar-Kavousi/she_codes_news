@@ -8,4 +8,5 @@ class NewsStory(models.Model):
         on_delete=models.CASCADE
         )
     pub_date = models.DateTimeField()
-    content = models.TextField()
+    content = models.TextField(null=True, blank=True)
+    image = models.TextField(null=True,blank=True)

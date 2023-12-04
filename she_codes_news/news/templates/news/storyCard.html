@@ -1,14 +1,16 @@
-<div class="story-card" id="story-card-{{ position }}">
-    <a href="{% url 'news:story' story.id %}">
+<div class="col-md-4">
+    <div class="card mx-2 my-2" style="width: 18rem;" id="story-card-{{ position }}">
         {% if position < 5 %}
-            <img src="../static/news/images/placeholder-{{ position }}.jpg">
+            <img src="../static/news/images/placeholder-{{ position }}.jpg" class="card-img-top"
+                 style="min-height: 250px;">
         {% else %}
-            <img src="https://picsum.photos/600">
+            <img src="https://picsum.photos/600" class="card-img-top" style="min-height: 250px;">
         {% endif %}
-        <div class="story-card-text">
-            <h3>{{ story.title }}</h3>
+        <div class="card-body">
+            <h5 class="card-title">{{ story.title }}</h5>
             <h4>{{ story.author }}</h4>
-            <h4>{{ story.pub_date }}</h4>
+            <p class="card-text">{{ story.pub_date|date:"d-M-Y" }}</p>
+            <a href="{% url 'news:story' story.id %}" class="btn btn-primary">Go somewhere</a>
         </div>
-    </a>
+    </div>
 </div>
