@@ -9,34 +9,38 @@
 
     <div class="d-flex align-items-center flex-column justify-content-center my-4">
         <h3 class="my-4">Welcome to SheCodes Story Books</h3>
-        <a class="btn btn-primary" href="{% url 'news:newStory' %}">Write New Story</a>
-
+        {% if request.user.is_authenticated %}
+            <a class="btn btn-primary" href="{% url 'news:newStory' %}">Write New Story</a>
+        {% endif %}
     </div>
     <div class="d-flex align-items-center flex-column justify-content-center my-4 bg-color1">
         <h2>Latest News</h2>
     </div>
-        <!-- Last Story -->
-        <div class="row my-4">
+    <!-- Last Story -->
+    <div class="row my-4">
 
-            {% if latest_stories %}
-                {% for story in latest_stories %}
-                    {% include "./storyCard.html" with story=story position=forloop.counter %}
-                {% endfor %}
-            {% else %}
-                <p>No stories are available.</p>
-            {% endif %}
-        </div>
+        {% if latest_stories %}
+            {% for story in latest_stories %}
+                {% include "./storyCard.html" with story=story position=forloop.counter %}
+            {% endfor %}
+        {% else %}
+            <p>No stories are available.</p>
+        {% endif %}
+    </div>
 
-        <!-- <div id="all-stories"> -->
-        <div class="row">
-            {% if latest_stories %}
-                {% for story in all_stories %}
+    <div class="d-flex align-items-center flex-column justify-content-center my-4 bg-color1">
+        <h2>Others News</h2>
+    </div>
+    <!-- <div id="all-stories"> -->
+    <div class="row">
+        {% if latest_stories %}
+            {% for story in all_stories %}
 
-                    {% include "./storyCard.html" with story=story %}
-                {% endfor %}
-            {% else %}
-                <p>No stories are available.</p>
-            {% endif %}
-        </div>
+                {% include "./storyCard.html" with story=story %}
+            {% endfor %}
+        {% else %}
+            <p>No stories are available.</p>
+        {% endif %}
+    </div>
 
 {% endblock %}
