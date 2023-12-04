@@ -17,10 +17,12 @@ class IndexView(generic.ListView):
         context['latest_stories'] = NewsStory.objects.all().order_by("-pub_date")[:3]
         return context
 
+
 class StoryView(generic.DetailView):
     model = NewsStory
     template_name = 'news/story.html'
     context_object_name = 'story'
+
 
 class AddStoryView(generic.CreateView):
     form_class = StoryForm
