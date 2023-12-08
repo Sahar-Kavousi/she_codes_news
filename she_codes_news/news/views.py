@@ -1,7 +1,8 @@
 from django.views import generic
+from django.views.generic.edit import UpdateView
 from django.urls import reverse_lazy
 from .models import NewsStory
-from .forms import StoryForm
+from .forms import StoryForm, CommentForm
 
 
 class IndexView(generic.ListView):
@@ -14,7 +15,8 @@ class IndexView(generic.ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['latest_stories'] = NewsStory.objects.all().order_by("-pub_date")[:3]
+        context['latest_stories'] = NewsStory.objects.all().order_by(
+            "-pub_date")[:3]
         return context
 
 
@@ -29,7 +31,53 @@ class AddStoryView(generic.CreateView):
     context_object_name = 'storyform'
     template_name = 'news/createStory.html'
     success_url = reverse_lazy('news:index')
+    comments = news.comments.all()
+    
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+
+class StoryUpdateView(UpdateView):
+    # specify the model you want to use
+    model = NewsStory
+    form_class = StoryForm
+    template_name = 'news/updateStory.html'
+    # specify the fields
+    # fields = [
+    #     "title",
+    #     "content",
+    #     "image"
+    # ]
+
+    # can specify success url
+    # url to redirect after successfully
+    # updating details
+    success_url = "/news/"
+
+
+class AddCommentView(generic.CreateView):
+    form_class = CommentForm
+
+    def get(self, request, *args, **kwargs):
+        return redirect("news:story", pk=self.kwargs.get("pk"))
 
     def form_valid(self, form):
         form.instance.author = self.request.user
+        pk = self.kwargs.get("pk")
+        form.instance.story = get_object_or_404(NewsStory, pk)
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse_lazy('news:story', kwargs={'pk': self.kwards.get("pk")})
+
+class AddNewCommentView(generic.CreateView):
+    form_class = StoryForm
+    context_object_name = 'commentform'
+    template_name = 'news/createComment.html'
+    success_url = reverse_lazy('news:index')
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        form.instance.story = self.request.user
         return super().form_valid(form)

@@ -1,6 +1,7 @@
 from django import forms
 from django.forms import ModelForm
-from .models import NewsStory
+from .models import NewsStory, Comment
+
 
 class StoryForm(ModelForm):
     class Meta:
@@ -21,7 +22,7 @@ class StoryForm(ModelForm):
                     'placeholder': 'Enter a title',
                 }
             ),
-            
+
             'content': forms.Textarea(  # Use TextInput for CharField
                 attrs={
                     'class': 'form-control',
@@ -35,3 +36,16 @@ class StoryForm(ModelForm):
                 }
             ),
         }
+
+
+class CommentForm(ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['text']
+        widgets = {
+            'text': forms.Textarea(  
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': 'Enter a content',
+                }
+            ),}
