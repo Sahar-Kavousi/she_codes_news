@@ -41,11 +41,24 @@ class StoryForm(ModelForm):
 class CommentForm(ModelForm):
     class Meta:
         model = Comment
-        fields = ['text']
+        fields = ['name', 'email', 'text']
         widgets = {
-            'text': forms.Textarea(  
+            'text': forms.Textarea(
                 attrs={
                     'class': 'form-control',
-                    'placeholder': 'Enter a content',
+                    'placeholder': 'Add your comment',
                 }
-            ),}
+            ),
+            'email': forms.Textarea(
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': 'Enter your email address',
+                }
+            ),
+            'name': forms.Textarea(
+                attrs={
+                    'class': 'form-control',
+                    'placeholder': 'Enter your name',
+                }
+            ),
+        }

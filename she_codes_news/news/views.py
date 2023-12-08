@@ -1,7 +1,8 @@
+from django.shortcuts import redirect, get_object_or_404
 from django.views import generic
 from django.views.generic.edit import UpdateView
 from django.urls import reverse_lazy
-from .models import NewsStory
+from .models import NewsStory, Comment
 from .forms import StoryForm, CommentForm
 
 
@@ -25,14 +26,53 @@ class StoryView(generic.DetailView):
     template_name = 'news/story.html'
     context_object_name = 'story'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        pk = self.kwargs["pk"]
+
+        form = CommentForm()
+        post = get_object_or_404(NewsStory, pk=pk)
+        comments = post.comments.all()
+
+        context['story'] = post
+        context['comments'] = comments
+        context['form'] = form
+        return context
+
+    def post(self, request, *args, **kwargs):
+        form = CommentForm(request.POST)
+        self.object = self.get_object()
+        context = super().get_context_data(**kwargs)
+
+        post = NewsStory.objects.filter(id=self.kwargs['pk'])[0]
+        comments = post.comments.all()
+
+        context['story'] = post
+        context['comments'] = comments
+        context['form'] = form
+
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            email = form.cleaned_data['email']
+            content = form.cleaned_data['text']
+
+            comment = Comment.objects.create(
+                name=name, email=email, text=content, story=post
+            )
+
+            form = CommentForm()
+            context['form'] = form
+            return self.render_to_response(context=context)
+
+        return self.render_to_response(context=context)
+
 
 class AddStoryView(generic.CreateView):
     form_class = StoryForm
     context_object_name = 'storyform'
     template_name = 'news/createStory.html'
     success_url = reverse_lazy('news:index')
-    comments = news.comments.all()
-    
+
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
@@ -54,30 +94,3 @@ class StoryUpdateView(UpdateView):
     # url to redirect after successfully
     # updating details
     success_url = "/news/"
-
-
-class AddCommentView(generic.CreateView):
-    form_class = CommentForm
-
-    def get(self, request, *args, **kwargs):
-        return redirect("news:story", pk=self.kwargs.get("pk"))
-
-    def form_valid(self, form):
-        form.instance.author = self.request.user
-        pk = self.kwargs.get("pk")
-        form.instance.story = get_object_or_404(NewsStory, pk)
-        return super().form_valid(form)
-
-    def get_success_url(self):
-        return reverse_lazy('news:story', kwargs={'pk': self.kwards.get("pk")})
-
-class AddNewCommentView(generic.CreateView):
-    form_class = StoryForm
-    context_object_name = 'commentform'
-    template_name = 'news/createComment.html'
-    success_url = reverse_lazy('news:index')
-
-    def form_valid(self, form):
-        form.instance.author = self.request.user
-        form.instance.story = self.request.user
-        return super().form_valid(form)
