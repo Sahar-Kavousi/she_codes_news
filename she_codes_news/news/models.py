@@ -10,7 +10,7 @@ class NewsStory(models.Model):
     )
     pub_date = models.DateTimeField()
     content = models.TextField(null=True, blank=True)
-    image = models.TextField(null=True, blank=True)
+    image = models.ImageField(upload_to='news_image', null=True, blank=True)
 
 
 class Comment(models.Model):
