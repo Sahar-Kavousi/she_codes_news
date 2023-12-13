@@ -29,14 +29,15 @@ We used Django to create a website for She Codes New. I create this news website
 - [x] Order stories by date
     
     ![ In Django, we can order stories by date using the order_by method in your query. Here we have a model with a date_published field, that allow us to order the stories by date in descending order,from newest to oldest.]
-    (./img/readme/ order stories by date.png) 
+    (./img/readme/ order-stories-by-date.png) 
 
  - [x] Styled "new story" form
     ![ I've applied styling to the "new story" form, allowing users to submit their stories. Users have the option to include an image related to their story, though it's not mandatory. However, specifying the publication date for the image is required. Additionally, users must provide a title for their story.]
-    ( ./img/readme/Styled "new story" form.png )
+    ( ./img/readme/new-story-form.png)
 
 - [x] Story images
-    ![ Every story has an image for a visually engaging experience. The story images are presented as card components, featuring essential details like the story title, author's name, and publication date below them. ]( ./img/readme/Story images.png )
+    ![ Every story has an image for a visually engaging experience. The story images are presented as card components, featuring essential details like the story title, author's name, and publication date below them. ]
+    ( ./img/readme/Story-images.png)
 
 - [x] Log-in/log-out
     ![ Login:
@@ -45,28 +46,28 @@ We used Django to create a website for She Codes New. I create this news website
     Logout: On the News page, Profile page anad Home page users have the option to log out, which disconnects them from their current session. Even after logging out, users can still view the stories available on the page. However, to contribute by creating a new story, users are prompted to create an account and log in.]
     
     ( ./img/readme/Log-in.png )
-    ( ./img/readme/Log-in.png )
+    ( ./img/readme/login-page.png)
     ( ./img/readme/logout.png )
 
 - [x] "Account view" page
     ![ On the account view or profile page, users have the ability to upload their profile picture, input their name, and provide a description about themselves. An edit option is available, enabling users to make adjustments to their profile details as desired. ]
-    ( ./img/readme/Account view.png)
+    ( ./img/readme/Account-view.png)
 
 - [x] "Create Account" page
     ![ The Create Account page is where users provide basic details like a unique username, secure password, and email. It initiates setting up an account and granting access to some of the features, such as the "create news story" button, upon completion. ]
-    ( ./img/readme/creat account page.png )
+    ( ./img/readme/creat-account-page.png)
 
 - [x] View stories by author
     ![ This feature allows users to explore a collection of stories specifically organized by their respective authors. Clicking on an author's name within a story card redirects users to that specific author's dedicated story page. ]
-    ( ./img/readme/View stories by author.png )
+    ( ./img/readme/View-stories-by-author.png )
 
 - [x] "Log-in" button only visible when no user is logged in/"Log-out" buttononly visible when a user *is* logged in
     ![ Users will see the "Log-in" button only if they're not logged in. It's there to help them sign in. On the flip side, the "Log-out" button shows up when they're logged in, making it easy to log out. These buttons dipalyed in NAV bar and will be adjust based on whether they're logged in or not.]
-    ( ./img/readme/login visibility.png )
+    ( ./img/readme/login-visibility.png )
 
 - [x] "Create Story" functionality only available when user is logged in
     ![ The "Create Story" button on the story news page is visible exclusively to users who are logged in. This button serves as a prompt for authenticated users, allowing them to contribute by crafting and sharing their own stories.]
-    ( ./img/readme/Create Story.png)
+    ( ./img/readme/Create-Story.png)
 
 
 ## Additional Features:
