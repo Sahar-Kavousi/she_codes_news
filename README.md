@@ -29,11 +29,11 @@ We used Django to create a website for She Codes New. I create this news website
 - [x] Order stories by date
     
     ![ In Django, we can order stories by date using the order_by method in your query. Here we have a model with a date_published field, that allow us to order the stories by date in descending order,from newest to oldest.]
-    (./img/images for news project Django/ order stories by date.png) 
+    (./img/readme/ order stories by date.png) 
 
  - [x] Styled "new story" form
     ![ I've applied styling to the "new story" form, allowing users to submit their stories. Users have the option to include an image related to their story, though it's not mandatory. However, specifying the publication date for the image is required. Additionally, users must provide a title for their story.]
-    ( ./img/images for news project Django/Styled "new story" form.png )
+    ( ./img/readme/Styled "new story" form.png )
 
 - [x] Story images
     ![ {{ Description of image }} ]( {{ ./relative_path_to_image_file }} )
