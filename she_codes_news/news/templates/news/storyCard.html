@@ -10,7 +10,9 @@
             <p>
                 by
                 <a href="{% url 'users:profile' story.author.username %}">
-                    <span class="badge bg-secondary">{{ story.author }}</span>
+                    <!-- <span class="badge bg-secondary">{{ story.author }}</span> -->
+                    {{ story.author }}
+
                 </a>
             </p>
             <a href="{% url 'news:story' story.id %}" class="btn btn-primary">Read more</a>

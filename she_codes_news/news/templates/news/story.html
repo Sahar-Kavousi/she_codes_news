@@ -22,7 +22,7 @@
 
                 {{ story.content|linebreaks }}
                 {% if request.user.is_authenticated %}
-                    <a class="btn btn-primary" href="{% url 'news:update' story.id %}"> UPDATE</a>
+                    <a class="btn btn-primary" href="{% url 'news:update' story.id %}">Edit</a>
                 {% endif %}
             </div>
         </div>

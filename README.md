@@ -72,11 +72,12 @@ We used Django to create a website for She Codes New. I create this news website
 
 ## Additional Features:
 
-- [ ] Add categories to the stories and allow the user to search for stories bycategory.
+- [] Add categories to the stories and allow the user to search for stories bycategory.
     ![ {{ Description of image }} ]( {{ ./relative_path_to_image_file }} )
 
-- [ ] Add the ability to update and delete stories (consider permissions - whoshould be allowed to update or and/or delete stories).
-    ![ {{ Description of image }} ]( {{ ./relative_path_to_image_file }} )
+- [x] Add the ability to update and delete stories (consider permissions - whoshould be allowed to update or and/or delete stories).
+    ![ I've included an Edit button that allows users to make changes to their stories. This option appears when the user is logged in and the story belongs to that particular author. ]
+    (./img/readme/edit-story-button.png)
 
 - [ ] Add the ability to “favourite” stories and see a page with your favouritestories.
     ![ {{ Description of image }} ]( {{ ./relative_path_to_image_file }} )
@@ -88,3 +89,8 @@ We used Django to create a website for She Codes New. I create this news website
 - [ ] Gracefully handle the error where someone tries to create a new story whenthey are not logged in.
     ![ {{ Description of image }} ]( {{ ./relative_path_to_image_file }} )
 
+
+[x] "Add comment" form
+    ![ This "Add Comment" form and functionality enable users to contribute their thoughts or feedback to a particular story. It could be found beneath the story, the form includes fields for users to enter their name, username and comment text . Users can submit their comments by clicking a "Add Comment" button.]
+    ( ./img/readme/adding_comment.png)
+    ( ./img/readme/comment-sample.png)
