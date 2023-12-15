@@ -1,5 +1,7 @@
-from django.shortcuts import redirect, get_object_or_404
-from django.views import generic
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import redirect, get_object_or_404, render
+from django.utils.decorators import method_decorator
+from django.views import generic, View
 from django.views.generic.edit import UpdateView
 from django.urls import reverse_lazy
 from .models import NewsStory, Comment
@@ -67,6 +69,7 @@ class StoryView(generic.DetailView):
         return self.render_to_response(context=context)
 
 
+@method_decorator(login_required, name='dispatch')
 class AddStoryView(generic.CreateView):
     form_class = StoryForm
     context_object_name = 'storyform'
@@ -78,19 +81,22 @@ class AddStoryView(generic.CreateView):
         return super().form_valid(form)
 
 
-class StoryUpdateView(UpdateView):
-    # specify the model you want to use
+@method_decorator(login_required, name='dispatch')
+class StoryUpdateView(View):
     model = NewsStory
     form_class = StoryForm
     template_name = 'news/updateStory.html'
-    # specify the fields
-    # fields = [
-    #     "title",
-    #     "content",
-    #     "image"
-    # ]
-
-    # can specify success url
-    # url to redirect after successfully
-    # updating details
     success_url = "/news/"
+
+    def get(self, request, pk):
+        post = get_object_or_404(NewsStory, id=pk, author=request.user)
+        form = StoryForm(instance=post)
+        return render(request, self.template_name, {'form': form})
+
+    def post(self, request, pk):
+        post = get_object_or_404(NewsStory, id=pk, author=request.user)
+        form = StoryForm(request.POST, instance=post)
+        if form.is_valid():
+            form.save()
+            return redirect(self.success_url)
+        return render(request, self.template_name, {'form': form})

@@ -29,11 +29,11 @@ class StoryForm(ModelForm):
                     'placeholder': 'Enter a content',
                 }
             ),
-            'image': forms.TextInput(  # Use TextInput for CharField
+            'image': forms.FileInput(  # Use TextInput for CharField
                 attrs={
                     'class': 'form-control',
                     'placeholder': 'Enter an image url',
-                }
+                },
             ),
         }
 

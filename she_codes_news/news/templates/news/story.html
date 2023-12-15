@@ -21,7 +21,7 @@
                 <h6 class="my-3">Publication date: {{ story.pub_date|date:"d-M-Y"}}</h6>
 
                 {{ story.content|linebreaks }}
-                {% if request.user.is_authenticated %}
+                {% if request.user.is_authenticated and story.author == request.user%}
                     <a class="btn btn-primary" href="{% url 'news:update' story.id %}">Edit</a>
                 {% endif %}
             </div>
